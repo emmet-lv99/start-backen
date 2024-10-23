@@ -1,20 +1,24 @@
 <h1>{{title}}</h1>
-<h2 class="text-xl">제목입니다.</h2>
-<div>
-  작성자:
-  <b>작성자 이름</b>
-</div>
+{{#with post}}
+  <h2 class="text-xl">{{title}}</h2>
+  <div>
+    작성자:
+    <b>{{writer}}</b>
+  </div>
 
-<div>
-  조회수: 999 | 작서일시 : 2022-01-01- 00:00:00
-  <button onclick="modifyPost()">수정</button>
-  <button onclick="deletePost()">삭제</button>
-</div>
+  <div>
+    조회수:
+    {{hits}}
+    | 작성일시 :
+    {{createdDt}}
+    <button onclick="modifyPost()">수정</button>
+    <button onclick="deletePost()">삭제</button>
+  </div>
 
-<div>
-  <pre>본문입니다. 하이호이</pre>
-</div>
-
+  <div>
+    <pre>{{content}}</pre>
+  </div>
+{{/with}}
 <section>
   {{! 댓글 개수 표시 }}
   <div>
@@ -65,3 +69,8 @@
     <a href="/">목록으로</a>
   </div>
 </footer>
+
+<script>
+  async function modifyPost() { }
+  async function deletePost() { }
+</script>
