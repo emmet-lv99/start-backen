@@ -22,11 +22,12 @@
 <section>
   {{! 댓글 개수 표시 }}
   <div>
-    <h3> 3개의 댓글이 있습니다. </h3>
+    <h3> {{lengthOfList comments}}개의 댓글이 있습니다. </h3>
   </div>
 
   {{! 댓글작성 폼 }}
   <form method="post" action="/write-comment">
+    <input type="hidden" name="id" value="{{_id}}" />
     <div>
       <div>
         <input type="text" name="name" placeholder="이름" />
@@ -49,19 +50,20 @@
 
 {{! 댓글 표시 영역 }}
 <section>
-  <div>
+  {{#each comments}}
     <div>
-      작성자:
-      <b>댓글 작성자</b>
-    </div>
-    <div>
-      작성일시 : 2022-01-01 00:00:00
-      <button onclick="deleteComment('1')">삭제</button>
+      <div>
+        작성자: <b>{{name}}</b>
+      </div>
+      <div>
+        작성일시 : {{dateString createdDt}}
+        <button onclick="deleteComment('{{idx}}')">삭제</button>
+      </div>
     </div>
     <div>
       <pre>{{comment}}</pre>
     </div>
-  </div>
+  {{/each}}
 </section>
 
 <footer>
@@ -77,6 +79,7 @@
       'Content-Type': 'application/json' 
     }
   } 
+
   async function modifyPost() {
     const password = prompt('패스워드를 입력해주세요')
     if(!password) {
@@ -123,4 +126,6 @@
     document.location= "/"  
 
   }
+
+
 </script>
